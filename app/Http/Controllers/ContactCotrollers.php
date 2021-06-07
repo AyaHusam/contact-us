@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Auth;
 
 class ContactCotrollers extends Controller
 {
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
      public function  index(){
-         $contact = Contact::all();
+         $contact = Contact::where('user_id', Auth::user()->id)->get();
          return view('index', compact('contact'));
     }
     public function create(){
@@ -16,7 +21,7 @@ class ContactCotrollers extends Controller
     }
      public function store(Request $request){
          $request->validate([
-             'First_Name' =>'required',
+             'First_Name' =>'required|min:5',
              'last_name' => 'required',
              'Email' => 'required',
          ]);
@@ -24,6 +29,7 @@ class ContactCotrollers extends Controller
          $contact->Fname = $request->First_Name;
          $contact->lname= $request->last_name;
          $contact->email= $request->Email;
+         $contact->user_id=Auth::user()->id;
          $contact->save();
          return  redirect()->back();
      }

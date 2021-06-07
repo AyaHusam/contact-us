@@ -12,23 +12,34 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="inputFirstName">First Name</label>
-                            <input type="text" class="form-control"  name="First_Name" id="inputFirstName" required>
+                            <input type="text" class="form-control"  name="First_Name" id="inputFirstName" >
+                            @error('First_Name')
+                            <p style="color: red" ;>{{$message}}</p>
+                       @enderror
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="inputLastName">Last Name</label>
-                            <input type="text" class="form-control" name="last_name" id="inputLastName" required>
+                            <input type="text" class="form-control" name="last_name" id="inputLastName" >
+                            @error('last_name')
+                            <p style="color: red" ;>{{$message}}</p>
+
+                       @enderror
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">Email Address</label>
-                    <input type="email" class="form-control"  name="Email" id="inputEmail" required>
+                    <input type="email" class="form-control"  name="Email" id="inputEmail" >
+                    @error('Email')
+                    <p style="color: red" ;>{{$message}}</p>
+                    @enderror
                 </div>
 
                 <input type="submit" class="btn btn-primary" value="Add Contact">
             </form>
+
         </div>
     </div>
 </div>
